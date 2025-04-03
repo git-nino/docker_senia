@@ -1,0 +1,33 @@
+- Infra_VMs:
+    - Windows_SRV:
+        icon: microsoft-windows
+        href: http://192.168.200.154:8190/#/client/MQBjAHBvc3RncmVzcWw
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(windows_cpu_time_total{mode="idle", instance="192.168.200.32:9182"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: RAM
+                  query: 100 - (avg by(instance) (windows_os_physical_memory_free_bytes{instance="192.168.200.32:9182"}) / avg by(instance) (windows_cs_physical_memory_bytes{instance="192.168.200.32:9182"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+
+                - label: Swap
+                  query: 100 - ((avg by(instance) (windows_memory_available_bytes{instance="192.168.200.32:9182"})) / (avg by(instance) (windows_memory_commit_bytes{instance="192.168.200.32:9182"})) * 100)
+
+
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals

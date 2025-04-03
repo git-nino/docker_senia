@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  ffmpeg-multicast:
+    image: jrottenberg/ffmpeg:4.1-alpine
+    container_name: ffmpeg-multicast
+    command: >
+      ffmpeg -re -stream_loop -1 -i /mnt/videos/sample.mp4 
+      -c:v libx264 -preset ultrafast -b:v 800k 
+      -c:a aac -b:a 128k -f mpegts 
+      udp://239.255.1.1:1234?pkt_size=1316
+    network_mode: "host"
+    volumes:
+      - ./videos:/mnt/videos:ro

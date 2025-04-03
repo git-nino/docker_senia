@@ -1,0 +1,22 @@
+- Infra_Access:
+    - DSS Server:
+        icon: limesurvey
+        href: https://192.168.200.200:8006
+        siteMonitor: https://192.168.200.200:8006
+
+
+    - Sonorisation:
+        icon: sonarr
+        href: http://192.168.200.130
+        siteMonitor: http://192.168.200.130
+
+    - FTTH-Router:
+        icon: huawei
+        href: http://192.168.200.1
+        siteMonitor: http://192.168.200.1
+
+    - Icosnet:
+        icon: tp-link
+        href: http://192.168.200.254
+        siteMonitor: http://192.168.200.254
+

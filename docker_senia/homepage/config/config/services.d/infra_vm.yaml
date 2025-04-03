@@ -1,0 +1,228 @@
+- Infra_VMs:
+    - Windows_SRV:
+        icon: microsoft-windows
+        href: https://localhost:6516/
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(windows_cpu_time_total{mode="idle", instance="192.168.200.32:9182"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: RAM
+                  query: 100 - (avg by(instance) (windows_os_physical_memory_free_bytes{instance="192.168.200.32:9182"}) / avg by(instance) (windows_cs_physical_memory_bytes{instance="192.168.200.32:9182"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+
+                - label: Swap
+                  query: 100 - ((avg by(instance) (windows_memory_available_bytes{instance="192.168.200.32:9182"})) / (avg by(instance) (windows_memory_commit_bytes{instance="192.168.200.32:9182"})) * 100)
+
+
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+    - Linux_SRV:
+        icon: linux
+        href: http://192.168.200.201:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Gateway_254:
+        icon: linux-mint
+        href: http://192.168.200.254:9191
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - SIEM_253:
+        icon: wazuh
+        href: http://192.168.200.254:9191
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Ubuntu_242:
+        icon: linuxserver-io
+        href: http://192.168.200.242:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.242:9100"}[1m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: |
+                    (node_memory_MemTotal_bytes{instance="192.168.200.242:9100"} 
+                     - node_memory_MemAvailable_bytes{instance="192.168.200.242:9100"}) 
+                     / node_memory_MemTotal_bytes{instance="192.168.200.242:9100"} * 100
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.242:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.242:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Ubuntu_241:
+        icon: linuxserver-io
+        href: http://192.168.200.241:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.241:9100"}[1m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: |
+                    (node_memory_MemTotal_bytes{instance="192.168.200.241:9100"} 
+                     - node_memory_MemAvailable_bytes{instance="192.168.200.241:9100"}) 
+                     / node_memory_MemTotal_bytes{instance="192.168.200.241:9100"} * 100
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.241:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.241:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Ubuntu_240:
+        icon: linuxserver-io
+        href: http://192.168.200.240:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.240:9100"}[1m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: |
+                    (node_memory_MemTotal_bytes{instance="192.168.200.240:9100"} 
+                     - node_memory_MemAvailable_bytes{instance="192.168.200.240:9100"}) 
+                     / node_memory_MemTotal_bytes{instance="192.168.200.240:9100"} * 100
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.240:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.240:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals

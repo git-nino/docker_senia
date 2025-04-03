@@ -1,0 +1,39 @@
+version: '3'
+services:
+  npm-db:
+    image: mariadb:latest
+    container_name: npm-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: npm
+      MYSQL_DATABASE: npm
+      MYSQL_USER: npm
+      MYSQL_PASSWORD: npm
+    volumes:
+      - npm-db-data:/var/lib/mysql
+
+  npm-app:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: npm-app
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      DB_MYSQL_HOST: npm-db
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: npm
+      DB_MYSQL_PASSWORD: npm
+      DB_MYSQL_NAME: npm
+    depends_on:
+      - npm-db
+    volumes:
+      - npm-data:/data
+      - letsencrypt:/etc/letsencrypt
+
+volumes:
+  npm-db-data:
+  npm-data:
+  letsencrypt:
+

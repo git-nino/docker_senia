@@ -1,0 +1,236 @@
+- Infra_Access:
+    - DSS Server:
+        icon: limesurvey
+        href: https://192.168.200.200:8006
+        siteMonitor: https://192.168.200.200:8006
+
+
+    - Sonorisation:
+        icon: sonarr
+        href: http://192.168.200.130
+        siteMonitor: http://192.168.200.130
+
+    - FTTH-Router:
+        icon: huawei
+        href: http://192.168.200.1
+        siteMonitor: http://192.168.200.1
+
+    - Icosnet:
+        icon: tp-link
+        href: http://192.168.200.254
+        siteMonitor: http://192.168.200.254
+
+- Infra_Grafana:
+    - Win_SRV-1:
+        icon: microsoft-windows
+        href: http://192.168.200.154:3000/d/lxwKHktMk/windows-system-overview?orgId=1&from=now-6h&to=now&timezone=browser&var-instance=192.168.200.32:9182&var-job=windows-exporter&refresh=5m
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(windows_cpu_time_total{mode="idle", instance="192.168.200.32:9182"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: RAM
+                  query: 100 - (avg by(instance) (windows_os_physical_memory_free_bytes{instance="192.168.200.32:9182"}) / avg by(instance) (windows_cs_physical_memory_bytes{instance="192.168.200.32:9182"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+
+                - label: Swap
+                  query: 100 - ((avg by(instance) (windows_memory_available_bytes{instance="192.168.200.32:9182"})) / (avg by(instance) (windows_memory_commit_bytes{instance="192.168.200.32:9182"})) * 100)
+
+
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+    - Win_SRV-2:
+        icon: microsoft-windows
+        href: http://192.168.200.154:3000/#/client/MQBjAHBvc3RncmVzcWw
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(windows_cpu_time_total{mode="idle", instance="192.168.200.32:9182"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: RAM
+                  query: 100 - (avg by(instance) (windows_os_physical_memory_free_bytes{instance="192.168.200.32:9182"}) / avg by(instance) (windows_cs_physical_memory_bytes{instance="192.168.200.32:9182"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+
+                - label: Swap
+                  query: 100 - ((avg by(instance) (windows_memory_available_bytes{instance="192.168.200.32:9182"})) / (avg by(instance) (windows_memory_commit_bytes{instance="192.168.200.32:9182"})) * 100)
+
+
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+    - Ubt_SRV-1:
+        icon: linux
+        href: http://192.168.200.154:3000/#/client/MwBjAHBvc3RncmVzcWw
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+
+
+
+
+
+- Infra_Guacamole:
+    - Win_SRV-1:
+        icon: microsoft-windows
+        href: http://192.168.200.154:8190/#/client/MQBjAHBvc3RncmVzcWw
+
+    - Win_SRV-2:
+        icon: microsoft-windows
+        href: http://192.168.200.154:8190/#/client/MQBjAHBvc3RncmVzcWw
+
+    - Ubt_SRV-1:
+        icon: linux
+        href: http://192.168.200.154:8190/#/client/MwBjAHBvc3RncmVzcWw
+
+
+- Applications:
+
+    - Uptimekuma:
+        href: http://192.168.200.154:3001
+        icon: uptime-kuma
+        siteMonitor: https://192.168.200.154:3001
+        widget:
+            type: uptimekuma
+            fields: ["up","down"]
+            url: http://192.168.200.154:3001
+            slug: all
+
+    - MySpeed:
+        href: http://192.168.200.154:5216
+        icon: myspeed
+        siteMonitor: https://192.168.200.154:5216
+        widget:
+          type: myspeed
+          fields: ["upload","download"]
+          url: http://192.168.200.154:5216
+
+    - Net-QoS:
+        icon: freshping-dark
+        href: http://192.168.200.154:3000/d/ee5gljanwf7k0b/blackbox-ping?var-interval=10s&orgId=1&from=now-6h&to=now&timezone=browser&var-target=$__all&refresh=30s
+        siteMonitor: https://192.168.200.154:3000
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: Latency
+                  query: avg_over_time(probe_icmp_duration_seconds{instance="8.8.8.8", phase="rtt"}[1m]) * 1000
+                  format:
+                    type: number
+                    suffix: " ms"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: Jitter
+                  query: stddev_over_time(probe_icmp_duration_seconds{instance="8.8.8.8", phase="rtt"}[1m]) * 1000
+                  format:
+                    type: number
+                    suffix: " ms"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: Loss
+                  query: (1 - avg_over_time(probe_success{instance="8.8.8.8"}[1m])) * 100
+                  format:
+                    type: number
+                    suffix: " %"
+                    options:
+                      maximumFractionDigits: 2  # This removes decimals
+
+    - Watch-Your-LAN:
+        href: http://192.168.200.154:8840/
+        icon: watchyourlan #netalertx
+        siteMonitor: https://192.168.200.154:8840
+        widget:
+          type: customapi
+          url: http://192.168.200.154:8840/api/status
+          refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
+          method: GET # optional, e.g. POST
+          headers: # optional, must be object, see below
+          requestBody: # optional, can be string or object, see below
+          display: # optional, default to block, see below
+          mappings:
+            - field: Total
+              label: Total
+              format: text # optional - defaults to text
+            - field: Online
+              format: number # optional - defaults to text
+              label: Online
+            - field: Unknown
+              label: New
+              format: number # optional - defaults to text
+
+####################################################
+
+    - LibreSpeed:
+        icon: librespeed
+        href: http://192.168.200.154:8383
+        siteMonitor: https://192.168.200.154:8383
+
+    - FreePBX:
+        href: http://192.168.200.154:8484
+        icon: freepbx
+        siteMonitor: https://192.168.200.154:8484
+
+    - Media-Server:
+        href: http://192.168.200.154:7000
+        icon: grandstream
+        siteMonitor: http://192.168.200.154:7000
+
+    - Paperless:
+        href: http://192.168.200.154:8000
+        icon: paperless
+        siteMonitor: https://192.168.200.154:8000
+
+#########################################################

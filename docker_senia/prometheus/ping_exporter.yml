@@ -1,0 +1,12 @@
+ping:
+  interval: 5s
+  timeout: 2s
+
+targets:
+  - name: "Google DNS"
+    address: "8.8.8.8"
+  - name: "Cloudflare DNS"
+    address: "1.1.1.1"
+  - name: "Router"
+    address: "192.168.1.1"
+

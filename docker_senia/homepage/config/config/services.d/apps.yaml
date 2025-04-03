@@ -1,0 +1,94 @@
+- Applications:
+
+    - Grafana:
+        icon: grafana
+        href: http://192.168.200.254:3000
+        siteMonitor: http://192.168.200.254:3000
+
+    - Prometheus:
+        icon: prometheus
+        href: http://192.168.200.254:9090
+        siteMonitor: http://192.168.200.254:9090
+
+    - Uptime-kuma:
+        href: http://192.168.200.254:3001
+        icon: uptime-kuma
+        siteMonitor: http://192.168.200.254:3001
+
+    - Guacamole:
+        href: http://192.168.200.254:8190
+        icon: guacamole
+        siteMonitor: http://192.168.200.254:8190
+
+    - Portainer:
+        href: http://192.168.200.254:9000
+        icon: portainer
+        siteMonitor: http://192.168.200.254:9000
+
+###################################
+    - MySpeed:
+        href: http://192.168.200.254:5216
+        icon: myspeed
+        siteMonitor: http://192.168.200.254:5216
+
+    - LibreSpeed:
+        icon: librespeed
+        href: http://192.168.200.254:8383
+        siteMonitor: http://192.168.200.254:8383
+
+    - SmokePing:
+        icon: smokeping
+        href: http://192.168.200.254:8282
+        siteMonitor: http://192.168.200.254:8282
+
+    - Net-QoS:
+        icon: grafana
+        href: http://192.168.200.254:3000/d/ee5gljanwf7k0b/blackbox-ping?var-interval=10s&orgId=1&from=now-6h&to=now&timezone=browser&var-t>
+        siteMonitor: http://192.168.200.254:8282
+
+
+    - Pi-Alert:
+        href: http://192.168.200.254:20211
+        icon: netalertx
+        siteMonitor: http://192.168.200.254:20211
+
+    - Adguard:
+        icon: adguard-home
+        href: http://192.168.200.253 
+        siteMonitor: http://192.168.200.254:2000
+
+    - Asterisk:
+        href: http://192.168.50.1
+        icon: asterisk
+        siteMonitor: http://192.168.200.254:2000
+
+    - Gitea:
+        href: https://10.2.10.1:4444
+        icon: gitea
+        siteMonitor: http://192.168.200.254:2000
+
+    - Pi-hole:
+        href: http://192.168.200.254:8080/admin
+        icon: pi-hole
+        siteMonitor: http://192.168.200.254:2000
+
+    - Nginx-Prox:
+        href: http://192.168.200.254:81
+        icon: nginx-proxy-manager
+        siteMonitor: http://192.168.200.254:2000
+
+    - Wazuh:
+        href: http://192.168.50.1
+        icon: wazuh
+        siteMonitor: http://192.168.200.254:2000
+
+    - Kibana:
+        href: http://192.168.50.1
+        icon: kibana
+        siteMonitor: http://192.168.200.254:2000
+
+    - elastic-search:
+        href: http://192.168.50.1
+        icon: elasticsearch
+        siteMonitor: http://192.168.200.254:2000
+

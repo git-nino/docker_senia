@@ -1,0 +1,31 @@
+    - Linux_SRV:
+        icon: linux
+        href: http://192.168.200.201:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals

@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  rembg:
+    image: danielgatis/rembg:latest
+    container_name: rembg
+    restart: unless-stopped
+    ports:
+      - "7000:7000"  # Exposes the rembg API on port 5000
+    command: " s"  # Corrected command
+    environment:
+      - LOG_LEVEL=INFO  # Adjust logging level if needed

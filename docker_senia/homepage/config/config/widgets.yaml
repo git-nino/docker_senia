@@ -1,0 +1,31 @@
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: short
+
+- datetime:
+    text_size: xl
+    format:
+      dayStyle: short
+
+- openmeteo:
+    label: Oran, Algeria Weather
+    latitude: 35.6977
+    longitude: -0.6331
+    timezone: Europe/Kiev
+    units: metric
+    cache: 5
+    format:
+      maximumFractionDigits: 1
+
+- resources:
+    cpu: true
+- resources:
+    memory: true
+- resources:
+    disk: /
+
+- resources:
+    network: true
+- resources:
+    uptime: true

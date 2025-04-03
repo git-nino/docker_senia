@@ -1,0 +1,35 @@
+#  image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2000
+settings:
+  statusCheck: true
+
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+
+background:
+  image: /assets/black-2.jpg  #https://unsplash.com/photos/silhouette-of-off-road-car-h8nxGssjQXs
+  blur: sm  # xl, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+  saturate: 50  # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  brightness: 50  # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 50  # 0-100
+
+theme: dark  # or light
+color: slate
+
+statusStyle: "dot"
+
+layout:
+  - Infra_Access:
+      style: row
+      columns: 4
+  - Infra_Grafana:
+      style: row
+      columns: 4
+  - Infra_Guacamole:
+      style: row
+      columns: 4
+      #initiallyCollapsed: true
+  - Applications:
+      style: row
+      columns: 4

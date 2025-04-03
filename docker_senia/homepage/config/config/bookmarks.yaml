@@ -1,0 +1,58 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Grafana:
+    - Windows_SRV:
+        - abbr: Win
+          icon: grafana
+          href: https://github.com/
+    - Windows_SRV:
+        - abbr: Win
+          icon: grafana
+          href: https://github.com/
+    - Ubuntu_254:
+        - abbr: Ubt
+          icon: grafana
+          href: https://github.com/
+    - Ubuntu_253:
+        - abbr: Ubt
+          icon: grafana
+          href: https://github.com/
+
+- Netdata:
+    - Windows_SRV:
+        - abbr: Win
+          icon: netdata
+          href: https://github.com/
+    - Windows_SRV:
+        - abbr: Win
+          icon: netdata
+          href: https://github.com/
+    - Ubuntu_254:
+        - abbr: Ubt
+          icon: netdata
+          href: https://github.com/
+    - Ubuntu_253:
+        - abbr: Ubt
+          icon: netdata
+          href: https://github.com/
+
+- Glances:
+    - Windows_SRV:
+        - abbr: Win
+          icon: glances
+          href: https://github.com/
+    - Windows_SRV:
+        - abbr: Win
+          icon: glances
+          href: https://github.com/
+    - Ubuntu_254:
+        - abbr: Ubt
+          icon: glances
+          href: https://github.com/
+    - Ubuntu_253:
+        - abbr: Ubt
+          icon: glances
+          href: https://github.com/
+

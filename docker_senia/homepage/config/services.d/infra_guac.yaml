@@ -1,0 +1,14 @@
+- Infra_Guacamole:
+    - Win_SRV-1:
+        icon: microsoft-windows
+        href: http://192.168.200.154:8190/#/client/MQBjAHBvc3RncmVzcWw
+
+    - Win_SRV-2:
+        icon: microsoft-windows
+        href: http://192.168.200.154:8190/#/client/MQBjAHBvc3RncmVzcWw
+
+    - Ubt_SRV-1:
+        icon: linux
+        href: http://192.168.200.154:8190/#/client/MwBjAHBvc3RncmVzcWw
+
+

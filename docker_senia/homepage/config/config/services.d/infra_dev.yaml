@@ -1,0 +1,20 @@
+- Infra_Devices:
+    - Proxmox:
+        icon: proxmox.png
+        href: https://192.168.200.200:8006
+
+    - Sophos:
+        href: https://10.1.10.1:4444
+        icon: sophos
+
+    - Fortigate:
+        href: https://10.2.10.1:4444
+        icon: fortinet
+
+    - OpenSense:
+        href: http://192.168.200.1
+        icon: pfsense
+
+    - FTTH_Router:
+        href: http://192.168.200.1
+        icon: homebridge

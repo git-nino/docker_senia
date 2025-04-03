@@ -1,0 +1,98 @@
+- Applications:
+
+    - Uptimekuma:
+        href: http://192.168.200.154:3001
+        icon: uptime-kuma
+        siteMonitor: https://192.168.200.154:3001
+        widget:
+            type: uptimekuma
+            fields: ["up","down"]
+            url: http://192.168.200.154:3001
+            slug: all
+
+    - MySpeed:
+        href: http://192.168.200.154:5216
+        icon: myspeed
+        siteMonitor: https://192.168.200.154:5216
+        widget:
+          type: myspeed
+          fields: ["upload","download"]
+          url: http://192.168.200.154:5216
+
+    - Net-QoS:
+        icon: freshping-dark
+        href: http://192.168.200.154:3000/d/ee5gljanwf7k0b/blackbox-ping?var-interval=10s&orgId=1&from=now-6h&to=now&timezone=browser&var-target=$__all&refresh=30s
+        siteMonitor: https://192.168.200.154:3000
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: Latency
+                  query: avg_over_time(probe_icmp_duration_seconds{instance="8.8.8.8", phase="rtt"}[1m]) * 1000
+                  format:
+                    type: number
+                    suffix: " ms"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: Jitter
+                  query: stddev_over_time(probe_icmp_duration_seconds{instance="8.8.8.8", phase="rtt"}[1m]) * 1000
+                  format:
+                    type: number
+                    suffix: " ms"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: Loss
+                  query: (1 - avg_over_time(probe_success{instance="8.8.8.8"}[1m])) * 100
+                  format:
+                    type: number
+                    suffix: " %"
+                    options:
+                      maximumFractionDigits: 2  # This removes decimals
+
+    - Watch-Your-LAN:
+        href: http://192.168.200.154:8840/
+        icon: watchyourlan #netalertx
+        siteMonitor: https://192.168.200.154:8840
+        widget:
+          type: customapi
+          url: http://192.168.200.154:8840/api/status
+          refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
+          method: GET # optional, e.g. POST
+          headers: # optional, must be object, see below
+          requestBody: # optional, can be string or object, see below
+          display: # optional, default to block, see below
+          mappings:
+            - field: Total
+              label: Total
+              format: text # optional - defaults to text
+            - field: Online
+              format: number # optional - defaults to text
+              label: Online
+            - field: Unknown
+              label: New
+              format: number # optional - defaults to text
+
+####################################################
+
+    - LibreSpeed:
+        icon: librespeed
+        href: http://192.168.200.154:8383
+        siteMonitor: https://192.168.200.154:8383
+
+    - FreePBX:
+        href: http://192.168.200.154:8484
+        icon: freepbx
+        siteMonitor: https://192.168.200.154:8484
+
+    - Media-Server:
+        href: http://192.168.200.154:7000
+        icon: grandstream
+        siteMonitor: http://192.168.200.154:7000
+
+    - Paperless:
+        href: http://192.168.200.154:8000
+        icon: paperless
+        siteMonitor: https://192.168.200.154:8000
+
+#########################################################

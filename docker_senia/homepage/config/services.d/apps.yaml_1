@@ -1,0 +1,60 @@
+- Applications:
+
+    - Uptimekuma:
+        href: http://192.168.200.154:3001
+        icon: uptime-kuma
+        widget:
+          type: uptimekuma
+          url: http://192.168.200.154:3001
+          slug: all
+
+    - MySpeed:
+        href: http://192.168.200.154:5216
+        icon: myspeed
+        widget:
+          type: myspeed
+          url: http://192.168.200.154:5216
+
+    - Net-QoS:
+        icon: freshping-dark
+        href: http://192.168.200.154:3000/d/ee5gljanwf7k0b/blackbox-ping?var-interval=10s&orgId=1&from=now-6h&to=now&timezone=browser&var-target=$__all&refresh=30s
+
+########################################
+
+    - Pi-Alert:
+        href: http://192.168.200.154:20211
+        icon: netalertx
+        widget:
+          type: netalertx
+          url: http://192.168.200.154:20211
+
+    - LibreSpeed:
+        icon: librespeed
+        href: http://192.168.200.154:8383
+
+    - Pi-hole:
+        href: http://192.168.200.254:8080/admin
+        icon: pi-hole
+       # widget:
+       #   type: pihole
+       #   url: http://192.168.200.154:8080
+       #   version: 6
+       #   password: Oran_2024 #yourpiholeapikey # optional, in v6 can be your password or app password
+
+    - Guacamole:
+        href: http://192.168.200.154:8190
+        icon: guacamole
+
+    - Asterisk:
+        href: http://
+        icon: asterisk
+
+#########################################################
+
+    - Paperless:
+        href: http://192.168.200.154:8000
+        icon: paperless
+
+    - Zerotier:
+        href: https://my.zerotier.com/network/
+        icon: zerotier

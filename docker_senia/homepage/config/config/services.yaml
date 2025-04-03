@@ -1,0 +1,342 @@
+- Infra_Devices:
+    - Proxmox:
+        icon: proxmox.png
+        href: https://192.168.200.200:8006
+
+    - Sophos:
+        href: https://10.1.10.1:4444
+        icon: sophos
+
+    - Fortigate:
+        href: https://10.2.10.1:4444
+        icon: fortinet
+
+    - OpenSense:
+        href: http://192.168.200.1
+        icon: pfsense
+
+    - FTTH_Router:
+        href: http://192.168.200.1
+        icon: homebridge
+- Infra_VMs:
+    - Windows_SRV:
+        icon: microsoft-windows
+        href: https://localhost:6516/
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(windows_cpu_time_total{mode="idle", instance="192.168.200.32:9182"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+                - label: RAM
+                  query: 100 - (avg by(instance) (windows_os_physical_memory_free_bytes{instance="192.168.200.32:9182"}) / avg by(instance) (windows_cs_physical_memory_bytes{instance="192.168.200.32:9182"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+
+                - label: Swap
+                  query: 100 - ((avg by(instance) (windows_memory_available_bytes{instance="192.168.200.32:9182"})) / (avg by(instance) (windows_memory_commit_bytes{instance="192.168.200.32:9182"})) * 100)
+
+
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # This removes decimals
+    - Linux_SRV:
+        icon: linux
+        href: http://192.168.200.201:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Gateway_254:
+        icon: linux-mint
+        href: http://192.168.200.254:9191
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - SIEM_253:
+        icon: wazuh
+        href: http://192.168.200.254:9191
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.254:9100"}[5m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: 100 - ((node_memory_MemAvailable_bytes{instance="192.168.200.254:9100"}) / (node_memory_MemTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.254:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.254:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Ubuntu_242:
+        icon: linuxserver-io
+        href: http://192.168.200.242:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.242:9100"}[1m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: |
+                    (node_memory_MemTotal_bytes{instance="192.168.200.242:9100"} 
+                     - node_memory_MemAvailable_bytes{instance="192.168.200.242:9100"}) 
+                     / node_memory_MemTotal_bytes{instance="192.168.200.242:9100"} * 100
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.242:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.242:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Ubuntu_241:
+        icon: linuxserver-io
+        href: http://192.168.200.241:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.241:9100"}[1m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: |
+                    (node_memory_MemTotal_bytes{instance="192.168.200.241:9100"} 
+                     - node_memory_MemAvailable_bytes{instance="192.168.200.241:9100"}) 
+                     / node_memory_MemTotal_bytes{instance="192.168.200.241:9100"} * 100
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.241:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.241:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+    - Ubuntu_240:
+        icon: linuxserver-io
+        href: http://192.168.200.240:9090
+        widget:
+            type: prometheusmetric
+            url: http://192.168.200.254:9090  # Prometheus server URL
+            refreshInterval: 10000  # Refresh every 10s
+            metrics:
+                - label: CPU
+                  query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle", instance="192.168.200.240:9100"}[1m])) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: RAM
+                  query: |
+                    (node_memory_MemTotal_bytes{instance="192.168.200.240:9100"} 
+                     - node_memory_MemAvailable_bytes{instance="192.168.200.240:9100"}) 
+                     / node_memory_MemTotal_bytes{instance="192.168.200.240:9100"} * 100
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+
+                - label: Swap
+                  query: 100 - ((node_memory_SwapFree_bytes{instance="192.168.200.240:9100"}) / (node_memory_SwapTotal_bytes{instance="192.168.200.240:9100"}) * 100)
+                  format:
+                    type: number
+                    suffix: "%"
+                    options:
+                      maximumFractionDigits: 0  # Remove decimals
+- Applications:
+
+    - Grafana:
+        icon: grafana
+        href: http://192.168.200.254:3000
+        siteMonitor: http://192.168.200.254:3000
+
+    - Prometheus:
+        icon: prometheus
+        href: http://192.168.200.254:9090
+        siteMonitor: http://192.168.200.254:9090
+
+    - Uptime-kuma:
+        href: http://192.168.200.254:3001
+        icon: uptime-kuma
+        siteMonitor: http://192.168.200.254:3001
+
+    - Guacamole:
+        href: http://192.168.200.254:8190
+        icon: guacamole
+        siteMonitor: http://192.168.200.254:8190
+
+    - Portainer:
+        href: http://192.168.200.254:9000
+        icon: portainer
+        siteMonitor: http://192.168.200.254:9000
+
+###################################
+    - MySpeed:
+        href: http://192.168.200.254:5216
+        icon: myspeed
+        siteMonitor: http://192.168.200.254:5216
+
+    - LibreSpeed:
+        icon: librespeed
+        href: http://192.168.200.254:8383
+        siteMonitor: http://192.168.200.254:8383
+
+    - SmokePing:
+        icon: smokeping
+        href: http://192.168.200.254:8282
+        siteMonitor: http://192.168.200.254:8282
+
+    - Net-QoS:
+        icon: grafana
+        href: http://192.168.200.254:3000/d/ee5gljanwf7k0b/blackbox-ping?var-interval=10s&orgId=1&from=now-6h&to=now&timezone=browser&var-t>
+        siteMonitor: http://192.168.200.254:8282
+
+
+    - Pi-Alert:
+        href: http://192.168.200.254:20211
+        icon: netalertx
+        siteMonitor: http://192.168.200.254:20211
+
+    - Adguard:
+        icon: adguard-home
+        href: http://192.168.200.253 
+        siteMonitor: http://192.168.200.254:2000
+
+    - Asterisk:
+        href: http://192.168.50.1
+        icon: asterisk
+        siteMonitor: http://192.168.200.254:2000
+
+    - Gitea:
+        href: https://10.2.10.1:4444
+        icon: gitea
+        siteMonitor: http://192.168.200.254:2000
+
+    - Pi-hole:
+        href: http://192.168.200.254:8080/admin
+        icon: pi-hole
+        siteMonitor: http://192.168.200.254:2000
+
+    - Nginx-Prox:
+        href: http://192.168.200.254:81
+        icon: nginx-proxy-manager
+        siteMonitor: http://192.168.200.254:2000
+
+    - Wazuh:
+        href: http://192.168.50.1
+        icon: wazuh
+        siteMonitor: http://192.168.200.254:2000
+
+    - Kibana:
+        href: http://192.168.50.1
+        icon: kibana
+        siteMonitor: http://192.168.200.254:2000
+
+    - elastic-search:
+        href: http://192.168.50.1
+        icon: elasticsearch
+        siteMonitor: http://192.168.200.254:2000
+

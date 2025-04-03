@@ -1,0 +1,43 @@
+- Group-1:
+    - Guacamole:
+        - abbr: Win
+          icon: guacamole
+          href: http://192.168.200.154:3000/dashboards
+
+    - Pi-hole:
+        - abbr: Win
+          icon: pi-hole
+          href: http://192.168.200.154:3000/dashboards
+
+    - Portainer:
+        - abbr: Win
+          icon: portainer
+          href: http://192.168.200.154:3000/dashboards
+
+- Group-2:
+    - Grafana:
+        - abbr: Win
+          icon: grafana
+          href: http://192.168.200.154:3000/dashboards
+
+    - Prometheus:
+        - abbr: Win
+          icon: prometheus
+          href: http://192.168.200.154:3000/dashboards
+
+    - Nginx-Prx-Manager:
+        - abbr: Win
+          icon: nginx-proxy-manager
+          href: http://192.168.200.154:3000/dashboards
+
+- Web-URL:
+    - Github:
+        - abbr: GH
+          icon: github-light
+          href: http://192.168.200.154:3000/dashboards
+
+    - Zerotier:
+        - abbr: Win
+          icon: zerotier
+          href: http://192.168.200.154:3000/dashboards
+
